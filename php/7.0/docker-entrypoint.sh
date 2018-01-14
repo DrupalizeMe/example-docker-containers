@@ -6,6 +6,11 @@ set -m
 # Don't continue if any command in the script fails.
 set -e
 
+# Delete any previously existing run file.
+if [ -f /run/apache2/apache2.pid ]; then
+    rm /run/apache2/apache2.pid
+fi
+
 # Allow the Apache docroot to be overridden.
 APACHE_DOCROOT_DIR="${APACHE_DOCROOT_DIR:-/var/www/html}"
 if [ -n "$APACHE_DOCROOT_DIR" ]; then

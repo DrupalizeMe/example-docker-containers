@@ -1,10 +1,18 @@
 FROM ubuntu:xenial
 
+################################################################################
+#                                                                              #
+#   THIS CONTAINER IS FOR EDUCATIONAL USE ONLY!                                #
+#                                                                              #
+#   Never use this container for running production workloads!                 #
+#                                                                              #
+################################################################################
+
 # Update the package manager, then install MariaDB server.
 RUN apt-get update && apt-get install -y mariadb-server=10.0.31-0ubuntu0.16.04.2
 
 # Reconfigure the bind address of MySQL to allow any incoming network connection.
-RUN sed -i -e "s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+RUN sed -i -e "s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Copy our custom entrypoint and make it executable.
 COPY docker-entrypoint.sh /usr/local/bin/
