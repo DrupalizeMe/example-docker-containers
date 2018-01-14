@@ -6,6 +6,9 @@ set -m
 # Don't continue if any command in the script fails.
 set -e
 
+# Create the lock file directory. 
+mkdir -p -m 777 /var/run/mysqld/
+
 # Define some variables, setting default values if necessary.
 MYSQL_DATABASE=${MYSQL_DATABASE:-lullabot_db}
 MYSQL_USERNAME=${MYSQL_USERNAME:-mysql}
@@ -29,7 +32,7 @@ if [ -n "$ADDITIONAL_DATABASES" ]; then
     done;
 fi
 
-# Flush any priviledges 
+# Flush any priviledges
 mysql -u root -e "FLUSH PRIVILEGES"
 
 # Shutdown our mysql server running in the background.
@@ -37,4 +40,3 @@ mysqladmin shutdown
 
 # Now that we're set up, run whatever command was passed to the entrypoint.
 exec "$@"
-

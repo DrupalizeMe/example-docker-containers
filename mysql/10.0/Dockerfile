@@ -21,4 +21,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 # If no command is passed to the container, start the MySQL server by default.
 CMD ["/usr/bin/mysqld_safe"]
-
