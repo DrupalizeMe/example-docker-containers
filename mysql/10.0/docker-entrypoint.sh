@@ -11,7 +11,7 @@ mkdir -p -m 777 /var/run/mysqld/
 
 # Define some variables, setting default values if necessary.
 MYSQL_DATABASE=${MYSQL_DATABASE:-lullabot_db}
-MYSQL_USERNAME=${MYSQL_USERNAME:-mysql}
+MYSQL_USER=${MYSQL_USER:-mysql}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
 
@@ -27,13 +27,13 @@ mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYS
 
 # Create a database with the given name, user, and password.
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}"
-mysql -u root -e "GRANT ALL ON ${MYSQL_DATABASE}.* to '${MYSQL_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'"
+mysql -u root -e "GRANT ALL ON ${MYSQL_DATABASE}.* to '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'"
 
 # Create any additional databases if we asked for them.
 if [ -n "$ADDITIONAL_DATABASES" ]; then
     for ADD_DB_NAME in $ADDITIONAL_DATABASES; do
       mysql -u root -e  "CREATE DATABASE IF NOT EXISTS $ADD_DB_NAME"
-      mysql -u root -e  "GRANT ALL ON \`$ADD_DB_NAME\`.* TO '$MYSQL_USERNAME'@'%' ;"
+      mysql -u root -e  "GRANT ALL ON \`$ADD_DB_NAME\`.* TO '$MYSQL_USER'@'%' ;"
     done;
 fi
 
