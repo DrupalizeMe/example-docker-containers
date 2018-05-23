@@ -9,7 +9,7 @@ FROM ubuntu:xenial
 ################################################################################
 
 # Update the package manager, then install MariaDB server.
-RUN apt-get update && apt-get install -y mariadb-server=10.0.31-0ubuntu0.16.04.2
+RUN apt-get update && apt-get install -y mariadb-server=10.0.34-0ubuntu0.16.04.1
 
 # Reconfigure the bind address of MySQL to allow any incoming network connection.
 RUN sed -i -e "s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
