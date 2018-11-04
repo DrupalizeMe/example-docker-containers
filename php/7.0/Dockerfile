@@ -25,7 +25,10 @@ RUN apt-get update && \
     php7.0-mysql \
     php7.0-curl \
     php7.0-soap \
-    mariadb-client
+    mariadb-client \
+    curl \
+    git \
+    zip
 
 # Replace the default site configuration with our own.
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
@@ -42,6 +45,9 @@ RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
 # Copy our custom entrypoint and make it executable.
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 # Expose the default Apache port.
 EXPOSE 80
