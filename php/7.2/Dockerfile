@@ -34,8 +34,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
     git \
     zip
 
-# Replace the default site configuration with our own.
+# Replace configuration files with our own.
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY php_apache2.ini /etc/php/7.2/apache2/php.ini
+COPY php_cli.ini /etc/php/7.2/cli/php.ini
+COPY php-conf /etc/php/7.2/mods-available
 
 # Enable mod_rewrite 'cause we needs it.
 RUN a2enmod rewrite
