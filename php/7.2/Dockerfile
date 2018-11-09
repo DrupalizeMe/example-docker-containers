@@ -32,9 +32,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
     mariadb-client \
     curl \
     git \
+    vim \
     zip
 
 # Replace configuration files with our own.
+COPY apache2.conf /etc/apache2/apache2.conf
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY php_apache2.ini /etc/php/7.2/apache2/php.ini
 COPY php_cli.ini /etc/php/7.2/cli/php.ini
