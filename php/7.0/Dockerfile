@@ -46,8 +46,12 @@ RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Install composer
+# Install composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+
+# Add vendor/bin to PATH and change to the Apache docroot dir.
+RUN echo export PATH="\$PATH:/var/www/html/vendor/bin/" >> ~/.bashrc && \
+    echo cd /var/www/html >> ~/.bashrc
 
 # Expose the default Apache port.
 EXPOSE 80
