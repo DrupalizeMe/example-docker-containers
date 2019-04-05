@@ -10,7 +10,7 @@ set -e
 mkdir -p -m 777 /var/run/mysqld/
 
 # Define some variables, setting default values if necessary.
-MYSQL_DATABASE=${MYSQL_DATABASE:-lullabot_db}
+MYSQL_DATABASE=${MYSQL_DATABASE:-drupalizeme_db}
 MYSQL_USER=${MYSQL_USER:-mysql}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
