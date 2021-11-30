@@ -41,8 +41,5 @@ fi
 # Flush any priviledges
 mysql -u root -e "FLUSH PRIVILEGES"
 
-# Shutdown our mysql server running in the background.
-mysqladmin shutdown
-
 # Now that we're set up, run whatever command was passed to the entrypoint.
 exec "$@"

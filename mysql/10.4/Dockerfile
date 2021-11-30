@@ -142,10 +142,8 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /var/lib/mysql
 
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+EXPOSE 3306
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-EXPOSE 3306
 CMD ["/usr/bin/mysqld_safe"]
